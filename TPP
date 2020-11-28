@@ -1,0 +1,69 @@
+using System;
+
+class Train_platform_planning
+{
+    static int maximum_platforms(int[] arr, int[] dep, int n)//Method to count maximum platform required in station.
+    {
+        Array.Sort(arr);
+        Array.Sort(dep);
+        int max_plat = 1, result = 1;
+        int i = 1, j = 0;
+        while (i < n && j < n)
+        {
+            if (arr[i] <= dep[j])
+            {
+                max_plat++;
+                i++;
+            }
+            else if (arr[i] > dep[j])
+            {
+                max_plat--;
+                j++;
+            }
+            if (max_plat > result)
+                result = max_plat;
+        }
+        return result;
+    }
+    static void display(int[] arr, int n)//Method to display train schedule.
+    {
+        int i = 0;
+        Console.Write("Train arrival schedule\n\n");
+        while (i < n)
+        {
+            Console.Write(arr[i] + "\n");
+            i++;
+        }
+    }
+    public static void Main()//Main program.
+    {
+        int[] arr = { 900, 940, 950, 1100, 1500, 1800 };// Train arrival timings.
+        int[] dep = { 910, 1200, 1120, 1130, 1900, 2000 };// Train departure timings.
+        int n = arr.Length;
+        display(arr, n);
+        int m = maximum_platforms(arr, dep, n);
+        Console.Write("\nMAXIMUM PLATFORMS REQUIRED IN STATION : " + m + "\n");//Display of maximum number of platforms
+        int i = 0, j = 0, pn = 0;
+        Console.WriteLine("\nPlease Enter the timings\n");
+        int t = Convert.ToInt32(Console.ReadLine());
+        while (i < n && j < n)
+        {
+
+            if (arr[i] <= dep[j])
+            {
+                pn++;
+                if (t == arr[i])
+                {
+                    Console.Write("\nNumber of platforms filled at " + t + " is : " + pn + "\n");//Display of number of platforms filled at given time.
+                    Console.Write("Number of platforms empty at " + t + " is : " + (3 - pn) + "\n");//Display of number of platforms empty at given time.
+                }
+                i++;
+            }
+            else if (arr[i] > dep[j])
+            {
+                pn--;
+                j++;
+            }
+        }
+    }
+}

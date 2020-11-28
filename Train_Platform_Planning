@@ -2,7 +2,7 @@ using System;
 
 class Train_platform_planning
 {
-    static int maximum_platforms(int[] arr, int[] dep, int n)//Method to count maximum platform required in station.
+    static int maximum_platforms(int[] arr, int[] dep, int n)//Method to count maximum number of platforms required in station.
     {
         Array.Sort(arr);
         Array.Sort(dep);
